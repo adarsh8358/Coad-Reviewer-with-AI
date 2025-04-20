@@ -1,0 +1,152 @@
+.project-main,
+.project-section {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+
+.project-section {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}
+
+.project-section>* {
+    height: 100%;
+    flex: 1;
+    border-radius: 0.5rem;
+}
+
+.project-section .chat {
+    background-color: #ededed;
+    position: relative;
+}
+
+.project-section .chat .messages {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 80%;
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+    top: 0;
+    padding-bottom: 5rem;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.project-section .chat .messages::-webkit-scrollbar {
+    display: none;
+}
+
+.project-section .chat .messages .message {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    max-width: 80%;
+    width: fit-content;
+    background-color: #dedada;
+}
+
+.project-section .chat .input-area {
+    position: absolute;
+    width: 80%;
+    background-color: #d4d4d4;
+    transform: translateX(-50%);
+    left: 50%;
+    border-radius: 0.7rem;
+    bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+}
+
+.project-section .chat .input-area input {
+    padding: 0.5rem 0.7rem;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.project-section .chat .input-area button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: rgb(52, 51, 51);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.project-section .code {
+    background-color: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.project-section .code .language-selector {
+    padding: 10px;
+    background-color: #252526;
+    z-index: 10;
+}
+
+.project-section .code .language-selector select {
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.project-section .code .language-selector select:hover {
+    background-color: #4c4c4c;
+}
+
+.project-section .code .language-selector select option {
+    background-color: #3c3c3c;
+    color: #ffffff;
+}
+
+/* Monaco Editor Adjustments */
+.project-section .code .monaco-editor .margin {
+    background-color: #1e1e1e;
+}
+
+.project-section .review {
+    background-color: #faece1;
+    position: relative;
+    overflow-y: auto;
+    padding: 1rem;
+    padding-left: 3rem;
+    padding-right: 2rem;
+    padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.project-section .review .get-review {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.project-section .review .review-content p {
+    font-weight: bold;
+}
