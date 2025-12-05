@@ -12,11 +12,16 @@ const Home = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/projects/get-all',"https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all")
+    fetch('https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all')
       .then(response => {
-        setProjects(response.data.data);
+        if (!response.ok) throw new Error('Failed to fetch projects');
+        return response.json();
       })
-      .catch(() => {
+      .then(data => {
+        setProjects(data.data || []);
+      })
+      .catch(error => {
+        console.error('Error fetching projects:', error);
         setProjects([]);
       });
   }, []);
