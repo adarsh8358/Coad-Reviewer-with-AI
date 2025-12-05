@@ -13,7 +13,7 @@ connectToDb();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
     cors: {
-        origin: ['*', 'http://localhost:5173',"https://coad-reviewer-with-ai-frontend.onrender.com"],
+        origin: '*',
     }
 });
 

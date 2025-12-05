@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Home.css';
 
 const Home = () => {
@@ -11,16 +12,11 @@ const Home = () => {
   }
 
   useEffect(() => {
-    fetch('https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all')
+    axios.get('http://localhost:3000/projects/get-all',"https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all")
       .then(response => {
-        if (!response.ok) throw new Error('Failed to fetch projects');
-        return response.json();
+        setProjects(response.data.data);
       })
-      .then(data => {
-        setProjects(data.data || []);
-      })
-      .catch(error => {
-        console.error('Error fetching projects:', error);
+      .catch(() => {
         setProjects([]);
       });
   }, []);
