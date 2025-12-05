@@ -12,7 +12,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/projects/get-all')
+    axios.get("https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all")
       .then(response => {
         setProjects(response.data.data);
       })
