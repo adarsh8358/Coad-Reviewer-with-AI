@@ -10,7 +10,7 @@ export async function getReview(code) {
     console.log("Code to review: ", code)
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-thinking-exp-01-21",
+        model: "gemini-2.0-flash",
         contents: code,
         config: {
             systemInstruction: `

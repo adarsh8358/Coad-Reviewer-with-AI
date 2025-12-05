@@ -1,4 +1,4 @@
-.create-project {
+/* .create-project {
     height: 100%;
     width: 100%;
 }
@@ -34,4 +34,81 @@
 
 .create-project-section form input[type="submit"]:hover {
     background-color: #004b9e;
+} */
+
+/* CreateProject.css */
+.create-project {
+  width: 100%;
+  min-height: 100vh;
+  background: #f9fafb; /* Light neutral backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.create-project-section {
+  background: #ffffff;
+  padding: 2.5rem 3rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Form */
+.create-project-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Text Input */
+.create-project-section form input[type="text"] {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.create-project-section form input[type="text"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Submit Button */
+.create-project-section form input[type="submit"] {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+}
+
+.create-project-section form input[type="submit"]:hover {
+  background-color: #1e40af;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Headline or Optional Label Styling */
+.create-project-section h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .create-project-section {
+    padding: 2rem;
+  }
 }

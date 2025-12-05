@@ -1,53 +1,66 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './Home.css'
+import './Home.css';
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [projects, setProjects] = useState([]);
 
-  const navigate = useNavigate()
-  const [projects, setProjects] = useState([])
-
-  function navigateToProject(projectId){
-    // navigate('/project/${projectId}')
-    navigate(`/project/${projectId}`) // ✅ works as expected
-
+  function navigateToProject(projectId) {
+    navigate(`/project/${projectId}`);
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/projects/get-all')
+    fetch('https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all')
       .then(response => {
-        setProjects(response.data.data)
-
+        if (!response.ok) throw new Error('Failed to fetch projects');
+        return response.json();
       })
-  })
+      .then(data => {
+        setProjects(data.data || []);
+      })
+      .catch(error => {
+        console.error('Error fetching projects:', error);
+        setProjects([]);
+      });
+  }, []);
 
   return (
     <main className='home'>
       <section className='home-section'>
-        <button
-          onClick={() => {
-            navigate('create-project')
-          }}
-        >New Project</button>
+        <div className='header'>
+          <h1>Projects</h1>
+          <button
+            className="new-project-btn"
+            onClick={() => navigate('create-project')}
+          >
+            + New Project
+          </button>
+        </div>
 
-        {projects.length == 0 ? <div><p>No Projects Created</p></div> : <div className="projects">
-          {projects.map((project) => {
-            return (
+        {projects.length === 0 ? (
+          <div className='empty'>
+            <p>No Projects Created</p>
+          </div>
+        ) : (
+          <div className="projects">
+            {projects.map((project) => (
               <div
-              onClick={() => {
-                navigateToProject(project._id)
-              }}
-               className="project">
-                {project.name}
+                key={project._id}
+                className="project-card"
+                onClick={() => navigateToProject(project._id)}
+              >
+                <div className="project-content">
+                  <h3>{project.name}</h3>
+                  <p>{project.description || "No description available"}</p>
+                </div>
               </div>
-            )
-          })
-          }
-        </div>}
+            ))}
+          </div>
+        )}
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

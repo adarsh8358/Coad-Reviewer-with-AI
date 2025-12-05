@@ -1,152 +1,302 @@
-.project-main,
+/* Project.css - modern clean layout for chat / editor / review */
+
+:root {
+  --bg: #f9fafb;
+  --muted: #6b7280;
+  --dark: #111827;
+  --accent: #2563eb;
+  --card: #ffffff;
+  --chat-bg: #f3f4f6;
+}
+
+.project-main {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  color: var(--dark);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .project-section {
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
+  display: flex;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1400px;
+  height: 80vh;
 }
 
-
-.project-section {
-    display: flex;
-    gap: 1rem;
-    padding: 0;
+/* Shared panel base */
+.project-section > * {
+  flex: 1;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(16, 24, 40, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.project-section>* {
-    height: 100%;
-    flex: 1;
-    border-radius: 0.5rem;
+/* Chat Panel */
+.chat {
+  background: var(--chat-bg);
+  padding: 1rem;
+  gap: 0.5rem;
 }
 
-.project-section .chat {
-    background-color: #ededed;
-    position: relative;
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
-.project-section .chat .messages {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    width: 80%;
-    transform: translateX(-50%);
-    left: 50%;
-    position: absolute;
-    top: 0;
-    padding-bottom: 5rem;
-    overflow-y: auto;
-    height: 100%;
+.chat-header h3 { margin: 0; font-size: 1.05rem; }
+.status { font-size: 0.85rem; padding: 0.25rem 0.5rem; border-radius: 999px; color: #fff; }
+.status.online { background: #10b981; } /* green */
+.status.offline { background: #ef4444; } /* red */
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.project-section .chat .messages::-webkit-scrollbar {
-    display: none;
+.messages::-webkit-scrollbar { width: 8px; }
+.messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+
+.empty-chat {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem 0;
 }
 
-.project-section .chat .messages .message {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    max-width: 80%;
-    width: fit-content;
-    background-color: #dedada;
+/* Message bubble */
+.message {
+  max-width: 85%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  word-wrap: break-word;
+  box-shadow: 0 2px 6px rgba(16,24,40,0.03);
 }
 
-.project-section .chat .input-area {
-    position: absolute;
-    width: 80%;
-    background-color: #d4d4d4;
-    transform: translateX(-50%);
-    left: 50%;
-    border-radius: 0.7rem;
-    bottom: 1rem;
-    padding: 1rem;
-    display: flex;
+.message.mine {
+  background: #2563eb;
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
 }
 
-.project-section .chat .input-area input {
-    padding: 0.5rem 0.7rem;
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    outline: none;
+.message.theirs {
+  background: #e5e7eb;
+  color: #111827;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
 }
 
-.project-section .chat .input-area button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: transparent;
-    color: rgb(52, 51, 51);
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Input area */
+.input-area {
+  display: flex;
+  gap: 0.5rem;
+  background: #e9eef7;
+  border-radius: 10px;
+  padding: 0.5rem;
+  align-items: center;
 }
 
-.project-section .code {
-    background-color: #1e1e1e;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+.input-area textarea {
+  flex: 1;
+  resize: none;
+  min-height: 46px;
+  max-height: 140px;
+  padding: 0.6rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-family: inherit;
 }
 
-.project-section .code .language-selector {
-    padding: 10px;
-    background-color: #252526;
-    z-index: 10;
+.send-btn {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform .12s ease, background .12s ease;
+}
+.send-btn:hover { transform: translateY(-2px); background: #1e40af; }
+.send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* CODE Panel */
+.code {
+  background: #0f1724; /* dark backdrop behind editor */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 420px;
 }
 
-.project-section .code .language-selector select {
-    background-color: #3c3c3c;
-    color: #ffffff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
+.code-toolbar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 
-.project-section .code .language-selector select:hover {
-    background-color: #4c4c4c;
+.select-wrap { width: 220px; min-width: 160px; }
+.editor-actions { margin-left: auto; display:flex; gap:0.5rem; align-items:center; }
+
+.btn-outline {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: #ffffff;
+  cursor: pointer;
+}
+.btn-outline:hover { transform: translateY(-2px); }
+
+/* Monaco editor fills the remaining space */
+.code > .monaco-editor, .code .monaco-editor .editor-instance {
+  height: calc(100% - 56px) !important;
 }
 
-.project-section .code .language-selector select option {
-    background-color: #3c3c3c;
-    color: #ffffff;
+/* REVIEW Panel */
+.review {
+  background: #fff;
+  padding: 1rem 1.25rem;
+  gap: 0.75rem;
 }
 
-/* Monaco Editor Adjustments */
-.project-section .code .monaco-editor .margin {
-    background-color: #1e1e1e;
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
-.project-section .review {
-    background-color: #faece1;
-    position: relative;
-    overflow-y: auto;
-    padding: 1rem;
-    padding-left: 3rem;
-    padding-right: 2rem;
-    padding-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    height: 100%;
-    text-align: center;
+.review-header h3 { margin: 0; font-size: 1.05rem; }
+.get-review {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.get-review:hover { background: #1e40af; transform: translateY(-2px); }
+
+.review-content {
+  overflow-y: auto;
+  padding-top: 0.5rem;
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-.project-section .review .get-review {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #ffffff;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+/* small helpful styles for markdown rendered content */
+.review-content pre {
+  background: #0b1220;
+  color: #e6eef8;
+  padding: 0.75rem;
+  border-radius: 8px;
+  overflow: auto;
+}
+.review-content code { background: rgba(0,0,0,0.04); padding: 0.12rem 0.36rem; border-radius: 4px; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .project-section { flex-direction: column; height: auto; }
+  .project-section > * { height: 420px; }
+  .code { min-width: auto; }
 }
 
-.project-section .review .review-content p {
-    font-weight: bold;
+/* Get Review button — professional, compact, accessible loading indicator */
+.get-review{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.5rem 0.9rem;
+  background: linear-gradient(180deg,#3b82f6,#2563eb);
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(37,99,235,0.18);
+  transition:transform .08s ease, filter .12s ease, opacity .12s ease;
+}
+.get-review:hover:not(:disabled){
+  transform:translateY(-2px);
+  filter:brightness(1.03);
+}
+.get-review:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+
+/* Spinner added to the left when aria-busy="true" on the button */
+.get-review[aria-busy="true"]{
+  pointer-events:none;
+  position:relative;
+  padding-left:2.6rem; /* make room for spinner */
+}
+.get-review[aria-busy="true"]::before{
+  content:"";
+  width:1rem;
+  height:1rem;
+  border:2px solid rgba(255,255,255,0.22);
+  border-top-color:#fff;
+  border-radius:50%;
+  position:absolute;
+  left:0.55rem;
+  top:50%;
+  transform:translateY(-50%);
+  animation:cr-spinner .8s linear infinite;
+}
+
+/* Review panel inline loading state (optional: toggle .loading on .no-review) */
+.review-content .no-review{
+  color:#6b7280;
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  font-style:italic;
+  line-height:1;
+}
+.review-content .no-review.loading::before{
+  content:"";
+  width:1rem;
+  height:1rem;
+  border:2px solid rgba(59,130,246,0.18);
+  border-top-color:#3b82f6;
+  border-radius:50%;
+  animation:cr-spinner .8s linear infinite;
+}
+
+/* subtle pulsing for "Generating" text */
+.review-content .no-review.loading{
+  color:#374151;
+  font-weight:500;
+  letter-spacing:0.1px;
+}
+
+/* keyframes */
+@keyframes cr-spinner{
+  to{ transform:rotate(360deg); }
 }
