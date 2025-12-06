@@ -12,15 +12,28 @@ const Home = () => {
     navigate(`/project/${projectId}`);
   }
 
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/projects/get-all',"https://coad-reviewer-with-ai-ja7z.vercel.app/projects/get-all")
+  //     .then(response => {
+  //       setProjects(response.data.data);
+  //     })
+  //     .catch(() => {
+  //       setProjects([]);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios.get('http://localhost:3000/projects/get-all',"https://coad-reviewer-with-ai-ja7z.vercel.app/projects/get-all")
-      .then(response => {
+    axios
+      .get('https://coad-reviewer-with-ai-ja7z.vercel.app/projects/get-all')
+      .then((response) => {
         setProjects(response.data.data);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
         setProjects([]);
       });
   }, []);
+
 
   return (
     <main className='home'>
