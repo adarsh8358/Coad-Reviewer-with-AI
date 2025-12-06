@@ -6,6 +6,7 @@ import http from 'http';
 import projectModel from './src/models/project.model.js';
 import { getReview } from './src/services/ai.service.js';
 // import { Socket } from 'dgram';
+import cors from 'cors';
 
 connectToDb();
 
@@ -18,6 +19,14 @@ const io = new SocketServer(server, {
         methods: ['GET', 'POST']
     }
 });
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://coad-reviewer-with-ai.vercel.app/'
+  ],
+  credentials: true
+}));
 
 io.on('connection', (socket) => {
     console.log('New Clint Connected');
