@@ -13,7 +13,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3000/projects/get-all',"https://coad-reviewer-with-ai-backend.onrender.com/projects/get-all")
+    axios.get('http://localhost:3000/projects/get-all',"https://coad-reviewer-with-ai-ja7z.vercel.app/projects/get-all")
       .then(response => {
         setProjects(response.data.data);
       })
